@@ -1,49 +1,49 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-// import ContactForm from '../contactForm/ContactForm'
-// import SearchBox from '../searchBox/SearchBox'
+import initialContacts from '../contacts.json'
+import ContactForm from '../contactForm/ContactForm'
+import SearchBox from '../searchBox/SearchBox'
 import ContactList from '../contactList/ContactList'
-// import Contact from '../contact/Contact'
 
 import './App.css'
 
 function App() {
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = window.localStorage.getItem("savedContacts");
+  const [contacts, setContacts] = useState(initialContacts);
+  const [filter, setFilter] = useState('');
 
-    if (savedContacts !== null) {
-      return JSON.parse(savedContacts);
+  useEffect(() => {
+    const savedContacts = JSON.parse(window.localStorage.getItem("savedContacts"));
+    if (savedContacts) {
+      setContacts(savedContacts);
     }
-    return[
-        {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-        {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-        {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-        {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-      ];
-  });
+  }, []);
 
-useEffect(() => {
-  window.localStorage.setItem("savedContacts", JSON.stringify(contacts));
-}, [contacts]);
-console.log(contacts);
+  const addContact = newContact => {
+    const updatedContacts = [...contacts, newContact];
+    setContacts(updatedContacts);
+    window.localStorage.setItem("savedContacts", JSON.stringify(updatedContacts));
+  };
+
+  const deleteContact = contactId => {
+    const updatedContacts = contacts.filter(contact => contact.id !== contactId);
+    setContacts(updatedContacts);
+    window.localStorage.setItem("savedContacts", JSON.stringify(updatedContacts));
+  };
 
 
-// const updatePhonebook = feedbackType => {
-//   setContacts({
-//     ...contacts,
-//     [feedbackType]: contacts[feedbackType] + 1
-//   });
-// };
-  
+const searchedContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
 
   return (
     <div className='phonebook-container'>
        <h1>Phonebook</h1>
-       {/* <ContactForm />
-       <SearchBox /> */}
-       <ContactList contacts={contacts} />
+       <ContactForm onAdd={addContact}/>
+       <SearchBox value={filter} onFilter={setFilter}/>
+       <ContactList contacts={searchedContacts} onDelete={deleteContact}/>
     </div>
-  )
+  );
 }
 
 export default App
