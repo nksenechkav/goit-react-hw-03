@@ -14,9 +14,9 @@ const ContactForm = ({ onAdd }) => {
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
-      <p className={css.label}>Name</p>
+      <label className={css.label}>Name</label>
       <input className={css.field} type="text" name="name" />
-      <p className={css.label}>Number</p>
+      <label className={css.label}>Number</label>
       <input className={css.field} type="text" name="number" />
       <button className={css.btn} type="submit">Add contact</button>
     </form>

@@ -11,21 +11,23 @@ function App() {
   const [contacts, setContacts] = useState(initialContacts);
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const savedContacts = JSON.parse(window.localStorage.getItem("savedContacts"));
-    if (savedContacts) {
-      setContacts(savedContacts);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedContacts = JSON.parse(window.localStorage.getItem("savedContacts"));
+  //   if (savedContacts) {
+  //     setContacts(savedContacts);
+  //   }
+  // }, []);
 
-  const addContact = newContact => {
+  const addContact = (newContact) => {
     const updatedContacts = [...contacts, newContact];
     setContacts(updatedContacts);
     window.localStorage.setItem("savedContacts", JSON.stringify(updatedContacts));
   };
 
-  const deleteContact = contactId => {
-    const updatedContacts = contacts.filter(contact => contact.id !== contactId);
+  const deleteContact = (id) => {
+    const updatedContacts = [...contacts];
+    const index = updatedContacts.findIndex ((contact) => contact.id === id);
+    updatedContacts.splice(index, 1);
     setContacts(updatedContacts);
     window.localStorage.setItem("savedContacts", JSON.stringify(updatedContacts));
   };

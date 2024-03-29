@@ -6,6 +6,7 @@ const SearchBox = ({ value, onFilter }) => {
       <p className={css.label}>Find contacts by name</p>
       <input className={css.searchField}
         type="text"
+        placeholder='Search name...'
         value={value}
         onChange={(e) => onFilter(e.target.value)}
       />
