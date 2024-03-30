@@ -7,29 +7,16 @@ const ContactForm = ({ onAdd }) => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
-  // const handleSubmit = (values, actions) => {
-	// 	console.log(values);
-  //   onAdd({
-  //         id: nanoid(),
-  //         name: e.target.elements.name.value,
-  //         number: e.target.elements.number.value,
-  //       });
-	// 	actions.resetForm();
-	// };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onAdd({
-      id: nanoid(),
-      name: e.target.elements.name.value,
-      number: e.target.elements.number.value,
-    });
-    e.target.reset();
-  };
+  const handleSubmit = (values, actions) => {
+		console.log(values);
+    onAdd(values);
+		actions.resetForm();
+	};
 
   return (
   
   <Formik initialValues={{
+    id: nanoid(),
     name: "",
     number: ""
   }} 
@@ -41,7 +28,7 @@ const ContactForm = ({ onAdd }) => {
         <label className={css.label} htmlFor={numberFieldId}>Number</label>
         <Field className={css.field} type="text" name="number" id={numberFieldId} />
 
-        <button type="submit">Add contact</button>
+        <button className={css.btn} type="submit">Add contact</button>
       </Form>
   </Formik>
   );

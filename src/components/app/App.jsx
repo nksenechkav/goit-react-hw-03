@@ -8,21 +8,30 @@ import ContactList from '../contactList/ContactList'
 import './App.css'
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState (() => {
+    const savedContacts = window.localStorage.getItem("savedContacts");
+
+    if (savedContacts !== null) {
+      return JSON.parse(savedContacts);
+    }
+    return initialContacts;
+  
+  });
+
   const [filter, setFilter] = useState('');
 
-  // useEffect(() => {
-  //   const savedContacts = JSON.parse(window.localStorage.getItem("savedContacts"));
-  //   if (savedContacts) {
-  //     setContacts(savedContacts);
-  //   }
-  // }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("savedContacts", JSON.stringify(contacts));
+  }, [contacts]);
+
 
   const addContact = (newContact) => {
     const updatedContacts = [...contacts, newContact];
     setContacts(updatedContacts);
     window.localStorage.setItem("savedContacts", JSON.stringify(updatedContacts));
   };
+
 
   const deleteContact = (id) => {
     const updatedContacts = [...contacts];
