@@ -1,34 +1,43 @@
 .item {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 4px;
-    padding: 10px;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
 
-  .btn {
-    width: 60px;
-    height: 30px;
-    font: inherit;
-  }
-  
-  .icon-wrapper {
-    width: 240px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-  }
+.icon-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 5px;
+}
 
-  .info {
-    font-size: 24px;
-    font-weight: 400;
-  }
+.my-icon {
+  margin-right: 10px;
+}
 
-  .my-icon {
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 10px;
- }
+.info {
+  font-size: 24px;
+  margin: 0;
+}
+
+.btn {
+  font-size: 18px;
+  width: 120px;
+  height: 40px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #c82333;
+}
