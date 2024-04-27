@@ -17,10 +17,10 @@ const ContactForm = ({ onAdd }) => {
 
   const handleSubmit = (values, actions) => {
     const nextContact = {
+      ...values,
       id: nanoid(),
       name: values.name.trim(),
       number: values.number.trim(),
-      ...values,
     }
     onAdd(nextContact);
 		actions.resetForm();
